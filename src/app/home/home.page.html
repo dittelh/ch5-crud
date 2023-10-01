@@ -1,15 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="warning">
-    <ion-title>
-      Student Register
-    </ion-title>
+    <ion-title> Student Register </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-
   <form [formGroup]="studentForm" (ngSubmit)="CreateRecord()">
-
     <ion-item>
       <ion-label position="floating">Name</ion-label>
       <ion-input formControlName="Name"></ion-input>
@@ -31,25 +27,30 @@
         &nbsp;Create Record
       </ion-button>
     </ion-item>
-
   </form>
-
 
   <ion-card *ngFor="let item of studentList" color="primary">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title>{{item.Name}} of {{item.Age}} years</ion-card-title>
+        <ion-card-title>{{item.Name}} {{item.Age}} years</ion-card-title>
         <ion-card-subtitle>From: {{item.Address}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-
-        <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+        <ion-button
+          shape="round"
+          color="secondary"
+          size="small"
+          (click)="EditRecord(item)"
+        >
           <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
-
         </ion-button>
-        <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+        <ion-button
+          shape="round"
+          color="danger"
+          size="small"
+          (click)="RemoveRecord(item.id)"
+        >
           <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
-
         </ion-button>
       </ion-card-content>
     </span>
@@ -58,16 +59,24 @@
         <ion-card-title>
           <ion-grid>
             <ion-row>
+              <ion-col> Edit </ion-col>
               <ion-col>
-                Edit
-              </ion-col>
-              <ion-col>
-                <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
+                <ion-button
+                  fill="solid"
+                  color="medium"
+                  size="small"
+                  (click)="item.isEdit = false"
+                >
                   Cancel
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button fill="solid" color="success" size="small" (click)="UpdateRecord(item)">
+                <ion-button
+                  fill="solid"
+                  color="success"
+                  size="small"
+                  (click)="UpdateRecord(item)"
+                >
                   Update
                 </ion-button>
               </ion-col>
@@ -91,5 +100,4 @@
       </ion-card-content>
     </ng-template>
   </ion-card>
-
 </ion-content>
