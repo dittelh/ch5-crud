@@ -1,0 +1,7 @@
+{
+  "name": "ch5-crud",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
