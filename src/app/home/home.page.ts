@@ -15,7 +15,6 @@ interface StudentData {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   studentList = [];
   studentData: StudentData;
   studentForm: FormGroup | undefined;
@@ -28,16 +27,14 @@ export class HomePage {
   }
 
   ngOnInit() {
-
     this.studentForm = this.fb.group({
-      Name: ['', [Validators.required]],
+      Name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       Age: ['', [Validators.required]],
       Address: ['', [Validators.required]]
-    })
+    });
 
-    this.firebaseService.read_students().subscribe(data => {
-
-      this.studentList = data.map(e => {
+    this.firebaseService.read_students().subscribe((data) => {
+      this.studentList = data.map((e) => {
         return {
           id: e.payload.doc.id,
           isEdit: false,
@@ -45,18 +42,19 @@ export class HomePage {
           Age: e.payload.doc.data()['Age'],
           Address: e.payload.doc.data()['Address'],
         };
-      })
+      });
       console.log(this.studentList);
-
     });
   }
 
   CreateRecord() {
     console.log(this.studentForm.value);
-    this.firebaseService.create_student(this.studentForm.value).then(resp => {
-      this.studentForm.reset();
-    })
-      .catch(error => {
+    this.firebaseService
+      .create_student(this.studentForm.value)
+      .then((resp) => {
+        this.studentForm.reset();
+      })
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -80,6 +78,4 @@ export class HomePage {
     this.firebaseService.update_student(recordRow.id, record);
     recordRow.isEdit = false;
   }
-
 }
-
